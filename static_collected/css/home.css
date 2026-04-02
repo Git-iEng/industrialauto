@@ -472,6 +472,14 @@ a {
   height:100%;
 }
 
+.generators-intro{
+  max-width: 850px;
+  margin: 10px auto 0;
+  text-align: center;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
 .generators-card:hover{
   transform:translateY(-6px);
   box-shadow:var(--lv-shadow);
