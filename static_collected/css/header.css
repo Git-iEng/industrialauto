@@ -165,7 +165,7 @@ a {
 }
 
 .nav__link:hover {
-  background-color: var(--black-color-light);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 
@@ -291,7 +291,7 @@ a {
     column-gap: .25rem;
   }
   .nav__link:hover {
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.05);
   }
 
   .dropdown__item, 
