@@ -1,36 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const nav = document.querySelector(".nav");              // NEW
+  const nav = document.querySelector(".nav");
   const navMenu = document.getElementById("nav-menu");
   const navToggle = document.getElementById("nav-toggle");
   const links = document.querySelectorAll('[data-scroll-to]');
   const header = document.querySelector(".header");
 
-  if (!navMenu || !navToggle) return;
+  if (!nav || !navMenu || !navToggle) return;
 
-  /* ===== OPEN MENU ===== */
   function openMenu() {
     navMenu.classList.add("show-menu");
-    nav.classList.add("show-icon");            // FIXED (was on toggle)
+    nav.classList.add("show-icon");
     document.body.classList.add("no-scroll");
     navToggle.setAttribute("aria-expanded", "true");
   }
 
-  /* ===== CLOSE MENU ===== */
   function closeMenu() {
     navMenu.classList.remove("show-menu");
-    nav.classList.remove("show-icon");         // FIXED
+    nav.classList.remove("show-icon");
     document.body.classList.remove("no-scroll");
     navToggle.setAttribute("aria-expanded", "false");
   }
 
-  /* ===== TOGGLE MENU ===== */
   navToggle.addEventListener("click", function (e) {
     e.stopPropagation();
     const isOpen = navMenu.classList.contains("show-menu");
     isOpen ? closeMenu() : openMenu();
   });
 
-  /* ===== SMOOTH SCROLL ===== */
   function headerOffset() {
     return header ? header.offsetHeight : 0;
   }
@@ -47,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* ===== NAV LINK CLICK ===== */
   links.forEach((el) => {
     el.addEventListener("click", function (e) {
       const targetSel = this.getAttribute("href") || this.dataset.target;
@@ -58,8 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!target) return;
 
       e.preventDefault();
-
-      closeMenu();   // FIX: close menu first
+      closeMenu();
 
       setTimeout(() => {
         smoothScrollTo(targetSel);
@@ -67,34 +61,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  /* ===== CLICK OUTSIDE CLOSE ===== */
   document.addEventListener("click", function (e) {
     if (!nav.contains(e.target) && navMenu.classList.contains("show-menu")) {
       closeMenu();
     }
   });
 
-  /* ===== ESC KEY CLOSE ===== */
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && navMenu.classList.contains("show-menu")) {
       closeMenu();
     }
   });
 
-  /* ===== SAFE DROPDOWN (FIXED) ===== */
-  const solutionToggle = document.querySelector('.dropdown-toggle-solutions');
+  const solutionToggle = document.querySelector(".dropdown-toggle-solutions");
 
-  if (solutionToggle) {   // FIX: prevent crash
-    const solutionItem = solutionToggle.closest('.dropdown__item');
+  if (solutionToggle) {
+    const solutionItem = solutionToggle.closest(".dropdown__item");
 
-    solutionToggle.addEventListener('click', (e) => {
+    solutionToggle.addEventListener("click", function (e) {
       e.preventDefault();
-      solutionItem.classList.toggle('active');
+      e.stopPropagation();
+      solutionItem.classList.toggle("active");
     });
 
-    document.addEventListener('click', function(event) {
+    document.addEventListener("click", function (event) {
       if (!solutionItem.contains(event.target)) {
-        solutionItem.classList.remove('active');
+        solutionItem.classList.remove("active");
       }
     });
   }
